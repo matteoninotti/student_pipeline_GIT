@@ -1,0 +1,7 @@
+{
+  "numero_studenti": 27,
+  "voto_min": 15,
+  "voto_max": 30,
+  "materie": ["Fondamenti DB", "Fondamenti coding", "Linux server", "JAVAAAA"],
+  "classe": "ITS ACA 25-27"
+}
