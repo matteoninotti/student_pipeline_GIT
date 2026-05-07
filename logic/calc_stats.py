@@ -5,15 +5,17 @@ from state import PROJECT_PATH
 
 
 class Stats_calculator:
-  def __init__(self, corso, etl):
+  def __init__(self, corso, studenti_json):
     self.subjects = corso.MATERIE
-    self.studenti_json = etl.create_validi_json()
+    self.studenti_json = studenti_json
     # crea una lista di liste contenente i voti per ogni studente
     voti_studenti = [] 
     for studente in self.studenti_json:
       voti_studente = [studente[subj] for subj in self.subjects]
       voti_studenti.append([int(v) for v in voti_studente]) # cast da str ad int
     print(voti_studenti)
+    
+
 
 
 
@@ -63,7 +65,7 @@ class Stats_calculator:
 #
 #
 #
-  #def calc_top5_studenti() -> list:
+  # def calc_top5_studenti() -> list:
   #  stats = calc_stats_studenti(voti_studenti)
   #  medie_top5 = sorted(stats, key = lambda stats: stats["media"], reverse=True)[:5]
   #  
@@ -73,7 +75,7 @@ class Stats_calculator:
 #
   #txt_file_name = PROJECT_PATH + "report/report_" + now_time + ".txt"
 #
-  #def create_report():
+  # def create_report():
   #  report = f"""report della classe: {Corso_studenti.CLASSE}
   #generato in data e ora: {now_time}
   #studenti totali: {Corso_studenti.N_STUDENTI}

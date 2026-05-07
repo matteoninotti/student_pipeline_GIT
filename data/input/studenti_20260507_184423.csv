@@ -1,0 +1,26 @@
+id,nome,cognome,data_nascita,email,Fondamenti DB,Fondamenti coding,Linux server,JAVAAAA
+1,Ronaldo,Benedetti,2005-11-01,ronaldo.benedetti@scuola.it,22,28,24,29
+2,Gionata,Ostinelli,1992-03-03,gionata.ostinelli@scuola.it,19,19,30,22
+3,Matilda,Gangemi,2001-06-29,matilda.gangemi@scuola.it,20,29,25,21
+4,Adriana,Salieri,2004-07-15,adriana.salieri@scuola.it,27,30,17,16
+5,Raffaella,Agazzi,2001-10-14,raffaella.agazzi@scuola.it,24,28,17,25
+6,Evangelista,Mozart,1988-02-15,evangelista.mozart@scuola.it,28,20,16,20
+7,Livio,Battelli,2004-02-27,livio.battelli@scuola.it,22,27,25,19
+8,Lilla,Farinelli,2000-05-25,lilla.farinelli@scuola.it,18,27,27,30
+9,Alessandra,Avogadro,2002-09-05,alessandra.avogadro@scuola.it,19,27,17,24
+10,Marta,Antonelli,1988-06-02,marta.antonelli@scuola.it,20,27,18,20
+11,Pina,Spinelli,1990-09-25,pina.spinelli@scuola.it,26,15,21,30
+12,Torquato,Gelli,1999-01-01,torquato.gelli@scuola.it,26,18,26,19
+13,Lamberto,Gemito,2005-05-04,lamberto.gemito@scuola.it,24,19,17,18
+14,Alderano,Giorgetti,1996-01-27,alderano.giorgetti@scuola.it,24,22,16,20
+15,Ida,Iacobucci,1990-10-11,ida.iacobucci@scuola.it,25,15,18,19
+16,Lucio,Pergolesi,1988-11-04,lucio.pergolesi@scuola.it,18,19,21,26
+17,Fabrizio,Contrafatto,1999-05-05,fabrizio.contrafatto@scuola.it,25,16,19,29
+18,Giacobbe,Vianello,1995-09-02,giacobbe.vianello@scuola.it,22,24,15,19
+19,Alfio,Comencini,1999-02-16,alfio.comencini@scuola.it,23,26,28,15
+20,Nico,Benedetti,1997-05-29,nico.benedetti@scuola.it,18,15,16,29
+21,Letizia,Brenna,2002-11-11,letizia.brenna@scuola.it,27,28,25,16
+22,Tina,Casagrande,1988-12-18,tina.casagrande@scuola.it,26,30,28,28
+23,Franco,Pareto,1994-12-05,franco.pareto@scuola.it,28,15,16,15
+25,Liliana,Caironi,1993-01-08,liliana.caironi@scuola.it,21,28,25,23
+26,Alberto,Gigli,2005-09-08,alberto.gigli@scuola.it,20,15,16,17

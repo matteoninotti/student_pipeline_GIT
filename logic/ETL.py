@@ -134,4 +134,3 @@ class ETL:
     
     return studenti_json
 
-

@@ -44,21 +44,22 @@ class CLI:
   def __init__(self):
     self.studenti_corso = corso.gen_studenti_corso() # creazione random degli studenti
     self.etl = ETL(self.studenti_corso) # creazione istanza ETL
-    self.stats_calculator = Stats_calculator(corso, self.etl) # creazione istanza Stats_calculator
   
   def generate(self):
     print(f"generati {len(self.studenti_corso)} studenti")
     self.etl.create_students_csv()
   
   def validate(self):
-    self.etl.create_students_csv()
+    self.generate()
     msg = self.etl.count_validation_errors()
     print(msg)
     self.etl.clean_scartati()
-    self.etl.create_validi_json()
+    self.studenti_json = self.etl.create_validi_json()
   
   def report(self):
-    pass
+    self.validate()
+    #studenti_json = self.etl.create_validi_json()
+    self.stats_calculator = Stats_calculator(corso, self.studenti_json) # creazione istanza Stats_calculator passando il val di ret di create_validi_json() a Stats_calculator
   
   def all(self):
     pass

@@ -5,11 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug calc_stats",
+      "name": "Debug smthsmth",
       "type": "debugpy",
       "request": "launch",
-      "module": "student_pipeline.logic.calc_stats",
-      "cwd": "${workspaceFolder}/..",
+      "program": "${workspaceFolder}/../student_pipeline_GIT/main.py",
+      "cwd": "${workspaceFolder}/../student_pipeline",
+      "env": { "PYTHONPATH": "${workspaceFolder}/../student_pipeline" },
       "console": "integratedTerminal"
     },
     {
