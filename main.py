@@ -1,4 +1,5 @@
 import os
+import json
 from sys import argv
 from logic.gen_students import Corso
 from logic.ETL import ETL
@@ -41,6 +42,9 @@ class CLI:
   """
   definisce i comandi da terminale
   """
+  # concettualmente no bello che report() chiami validate() ecc..
+  # TROVARE ALTRO SISTEMA (instance attributes + file di persistenza)
+
   def __init__(self):
     self.studenti_corso = corso.gen_studenti_corso() # creazione random degli studenti
     self.etl = ETL(self.studenti_corso) # creazione istanza ETL
@@ -51,17 +55,29 @@ class CLI:
   
   def validate(self):
     self.generate()
-    msg = self.etl.count_validation_errors()
-    print(msg)
+    validation_errors = self.etl.count_validation_errors()
+    print("\n\\/------- errori di validazione -------\\/")
+    print(validation_errors)
     self.etl.clean_scartati()
     self.studenti_json = self.etl.create_validi_json()
   
   def report(self):
     self.validate()
-    #studenti_json = self.etl.create_validi_json()
-    self.stats_calculator = Stats_calculator(corso, self.studenti_json) # creazione istanza Stats_calculator passando il val di ret di create_validi_json() a Stats_calculator
-  
+    print("\n\\/------- statistiche corso -------\\/")
+    # creaz istanza Stats_calculator passando self.studenti_json (= ret di self.etl.create_validi_json())
+    self.calc = Stats_calculator(corso, self.studenti_json)
+    stats_corso = self.calc.calc_stats_corso()
+    print(f"{json.dumps(stats_corso, indent=2)}")
+    print("\n\\/------- statistiche studenti -------\\/")
+    stats_studenti = self.calc.calc_stats_studenti()
+    print(f"{json.dumps(stats_studenti, indent=2)}")
+
   def all(self):
+    pass
+  
+  def delete(self):
+    # cancella cartelle di lavoro se esistono
+    # + tutto il loro contenuto
     pass
 
 

@@ -93,11 +93,9 @@ class ETL:
     date_counter = c(v.get("data_valida") for v in validati)
     voti_counter = c(v.get("voti_in_range") for v in validati)
 
-    return f"""
-  email non valide: {email_counter[False]}
-  date non valide: {date_counter[False]}
-  voti fuori range: {voti_counter[False]}
-    """
+    return f"""email non valide: {email_counter[False]}
+date non valide: {date_counter[False]}
+voti fuori range: {voti_counter[False]}"""
   
   
   def clean_scartati(self) -> list:
