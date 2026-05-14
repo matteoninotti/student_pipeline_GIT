@@ -5,6 +5,7 @@ from random import randint
 from state import DATA_PATH
 
 
+
 fake = Faker("it_IT")
 
 class Studente:
@@ -12,14 +13,15 @@ class Studente:
   studente di cui genereremo i dati con faker
   """
   def __init__(self, id:int, nome:str, cognome:str,
-              data_nascita:datetime | date, email:str, voti:dict):
+              data_nascita:datetime | date, email:str, voti:dict) -> None:
     self.id = id
     self.nome = nome
     self.cognome = cognome
     self.data_nascita = data_nascita
     self.email = email
     self.voti = voti
-
+  
+  
   def to_dict(self) -> dict:
     """
     converte l'istanza di Studente in un dict
@@ -32,7 +34,8 @@ class Studente:
       "email": self.email,
       "voti": self.voti
     }
-
+  
+  
   @staticmethod
   def gen_random_student(id:int, materie:list,
                         voto_min:int, voto_max:int) -> dict:
@@ -66,20 +69,23 @@ class Studente:
 
 
 with open(DATA_PATH, "r", encoding="utf-8") as f:
-  corso = json.load(f)
+  c = json.load(f)
+
+
 
 class Corso:
   """
   config iniziale del corso.
   modificare config.json per cambiare gli attributi del corso
   """
-  N_STUDENTI = corso["numero_studenti"]
-  VOTO_MIN = corso["voto_min"]
-  VOTO_MAX = corso["voto_max"]
-  MATERIE = corso["materie"]
-  CLASSE = corso["classe"]
+  N_STUDENTI = c["numero_studenti"]
+  VOTO_MIN = c["voto_min"]
+  VOTO_MAX = c["voto_max"]
+  MATERIE = c["materie"]
+  CLASSE = c["classe"]
   
-  def gen_studenti_corso(self):
+  
+  def gen_studenti_corso(self) -> list:
   # genera studenti tenendo in considerazione le specifiche di config.json
     return [
       Studente.gen_random_student(

@@ -2,18 +2,18 @@ import csv
 import re
 import json
 import os
+from shutil import copy
 from collections import Counter
 from datetime import datetime
 from logic.gen_students import Corso
 from state import PROJECT_PATH
 
 
+
 now_time = datetime.now().strftime("%Y%m%d_%H%M%S") 
 
-
-
 class ETL:
-  def __init__(self, studenti_corso):
+  def __init__(self, studenti_corso: list) -> None:
     self.subjects = Corso.MATERIE
     self.studenti = studenti_corso
     # definisce i nomi dei campi usati dal csv
@@ -45,7 +45,7 @@ class ETL:
     
     return studenti_reformated
   
-
+  
   def create_students_csv(self) -> None:
     """
     scrive studenti_reformated in formato csv in "student_pipeline/data/input/" 
@@ -56,7 +56,12 @@ class ETL:
       writer.writeheader()
       writer.writerows(studenti_reformated)
     
-    return None
+    return None  
+  
+  
+  def bkup_csv(self) -> None:
+    bkup_file_name = os.path.join(PROJECT_PATH, "data", "backup", f"backup_studenti_{now_time}.csv")
+    copy(self.csv_file_name, bkup_file_name)
   
   
   def validate_csv(self) -> list:
@@ -68,7 +73,7 @@ class ETL:
     
     EMAIL_REGEX = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
     DATA_REGEX = r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$"
-
+    
     with open(self.csv_file_name, "r", encoding="utf-8") as f:
       studenti_reader = csv.DictReader(f)
       
@@ -93,7 +98,7 @@ class ETL:
     email_counter = c(v.get("email_valida") for v in validati)
     date_counter = c(v.get("data_valida") for v in validati)
     voti_counter = c(v.get("voti_in_range") for v in validati)
-
+    
     return f"""email non valide: {email_counter[False]}
 date non valide: {date_counter[False]}
 voti fuori range: {voti_counter[False]}"""
@@ -107,9 +112,10 @@ voti fuori range: {voti_counter[False]}"""
     with open(self.csv_file_name, "r", encoding="utf-8") as f:
       righe = list(csv.DictReader(f))
     
-    da_rimuovere = [s["id"] for s in validati if not all(v for v in s.values())]
+    da_rimuovere = [riga for riga, valido in zip(righe, validati) if not all(v for v in valido.values())]
+    ids_da_rimuovere = {r["id"] for r in da_rimuovere}
     
-    righe_filtrate = [r for r in righe if r["id"] not in da_rimuovere]
+    righe_filtrate = [r for r in righe if r["id"] not in ids_da_rimuovere]
     
     with open(self.csv_file_name, "w", encoding="utf-8") as f:
       writer = csv.DictWriter(f, fieldnames=righe[0].keys())
@@ -132,3 +138,4 @@ voti fuori range: {voti_counter[False]}"""
       json.dump(studenti_json, f, indent=2)
     
     return studenti_json
+
