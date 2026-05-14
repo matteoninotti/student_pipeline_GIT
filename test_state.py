@@ -9,6 +9,7 @@ class TestStatePaths(unittest.TestCase):
     project_path = Path(state.PROJECT_PATH).resolve()
     expected_project_path = Path(__file__).resolve().parent
     self.assertEqual(project_path, expected_project_path)
+    self.assertFalse(state.PROJECT_PATH.endswith(("/", "\\")))
 
   def test_data_path_points_to_config(self):
     data_path = Path(state.DATA_PATH).resolve()
