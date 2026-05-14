@@ -1,3 +1,5 @@
-PROJECT_PATH = "/Users/matteo/Desktop/ITS ICT/fondam program/esercizi/5_270426/student_pipeline_GIT/"
+import os
 
-DATA_PATH = "/Users/matteo/Desktop/ITS ICT/fondam program/esercizi/5_270426/student_pipeline/config.json"
+
+PROJECT_PATH = os.path.dirname(os.path.abspath(__file__)) + os.sep
+DATA_PATH = os.path.join(PROJECT_PATH, "config.json")
