@@ -1,6 +1,7 @@
 import csv
 import re
 import json
+import os
 from collections import Counter
 from datetime import datetime
 from logic.gen_students import Corso
@@ -17,9 +18,9 @@ class ETL:
     self.studenti = studenti_corso
     # definisce i nomi dei campi usati dal csv
     self.fieldnames = ["id", "nome", "cognome", "data_nascita", "email", *self.subjects]
-    self.csv_file_name = PROJECT_PATH + "data/input/studenti_" + now_time + ".csv"
+    self.csv_file_name = os.path.join(PROJECT_PATH, "data", "input", f"studenti_{now_time}.csv")
     # crea il nome del file JSON degli studenti validi, appendendo data e ora attuale
-    self.json_file_name = PROJECT_PATH + "data/output/studenti_validi_" + now_time + ".json"
+    self.json_file_name = os.path.join(PROJECT_PATH, "data", "output", f"studenti_validi_{now_time}.json")
   
   
   def reformat_studenti(self) -> list:
@@ -131,4 +132,3 @@ voti fuori range: {voti_counter[False]}"""
       json.dump(studenti_json, f, indent=2)
     
     return studenti_json
-

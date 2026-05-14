@@ -23,7 +23,7 @@ def create_folders() -> str:
   if "data" not in f_list:
     os.mkdir("./data")
   
-  os.chdir(PROJECT_PATH + "/data")
+  os.chdir(os.path.join(PROJECT_PATH, "data"))
   f_list = os.listdir()
   if "input" not in f_list:
     os.mkdir("./input")
