@@ -224,3 +224,4 @@ data/output/
 data/input/*.csv
 report/
 .vscode/
+.DS_Store
