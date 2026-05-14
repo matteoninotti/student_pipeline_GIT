@@ -15,6 +15,8 @@ class TestStatePaths(unittest.TestCase):
     data_path = Path(state.DATA_PATH).resolve()
     self.assertEqual(data_path, Path(state.PROJECT_PATH).resolve() / "config.json")
     self.assertEqual(data_path.name, "config.json")
+    self.assertNotIn("//config.json", state.DATA_PATH)
+    self.assertNotIn("\\\\config.json", state.DATA_PATH)
 
 
 if __name__ == "__main__":
