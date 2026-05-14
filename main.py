@@ -8,7 +8,7 @@ from state import PROJECT_PATH
 
 
 
-def install_requirements():
+def install_requirements() -> None:
   """verifica pacchetti installati e -dopo conferma user- installa se non presenti"""
   pass
 
@@ -44,46 +44,69 @@ class CLI:
   """
   # concettualmente no bello che report() chiami validate() ecc..
   # TROVARE ALTRO SISTEMA (instance attributes + file di persistenza)
-
-  def __init__(self):
+  def __init__(self) -> None:
     self.studenti_corso = corso.gen_studenti_corso() # creazione random degli studenti
     self.etl = ETL(self.studenti_corso) # creazione istanza ETL
   
-  def generate(self):
+  
+  def generate(self) -> None:
     print(f"generati {len(self.studenti_corso)} studenti")
     self.etl.create_students_csv()
+    self.etl.bkup_csv()
   
-  def validate(self):
+  
+  def validate(self) -> None:
     self.generate()
-    validation_errors = self.etl.count_validation_errors()
-    print("\n\\/------- errori di validazione -------\\/")
-    print(validation_errors)
-    self.etl.clean_scartati()
+    self.validation_errors = self.etl.count_validation_errors()
+    
+    print("\n\\/------- errori di validazione -------\\/\n")
+    print(self.validation_errors)
+    self.da_rimuovere = self.etl.clean_scartati()
+    
+    print("\n\\/------- studenti non validi -------\\/\n")
+    print(f"{json.dumps(self.da_rimuovere, indent=2)}")
+    
     self.studenti_json = self.etl.create_validi_json()
   
-  def report(self):
+  
+  def report(self) -> None:
     self.validate()
-    print("\n\\/------- statistiche corso -------\\/")
+    
+    print("\n\\/------- statistiche corso -------\\/\n")
     # creaz istanza Stats_calculator passando self.studenti_json (= ret di self.etl.create_validi_json())
     self.calc = Stats_calculator(corso, self.studenti_json)
     self.stats_corso = self.calc.calc_stats_corso()
-    print(f"{json.dumps(stats_corso, indent=2)}")
-    print("\n\\/------- statistiche studenti -------\\/")
+    print(f"{json.dumps(self.stats_corso, indent=2)}")
+    
+    print("\n\\/------- statistiche studenti -------\\/\n")
     self.stats_studenti = self.calc.calc_stats_studenti()
     print(f"{json.dumps(self.stats_studenti, indent=2)}")
-    top5 = self.calc.calc_top5_studenti(self.stats_studenti)
-
-  def all(self):
-    pass
+    self.top5_studenti = self.calc.calc_top5_studenti(self.stats_studenti)
+    
+    print("\n\\/------- top5 studenti -------\\/\n")
+    print(f"{json.dumps(self.top5_studenti, indent=2)}")
+    
+    self.calc.create_report(self.da_rimuovere,
+                            self.validation_errors,
+                            self.stats_corso,
+                            self.stats_studenti,
+                            self.top5_studenti)
   
-  def delete(self):
+  
+  def all(self) -> None:
+    self.generate()
+    self.validate()
+    self.report()
+  
+  
+  def delete(self) -> None:
     # cancella cartelle di lavoro se esistono
     # + tutto il loro contenuto
     pass
 
 
 
-def main():
+def main() -> None:
   msg = create_folders()
   print(msg)
   global corso
