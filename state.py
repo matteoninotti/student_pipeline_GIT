@@ -1,3 +1,6 @@
-PROJECT_PATH = "/Users/matteo/Desktop/ITS ICT/fondam program/esercizi/5_270426/student_pipeline_GIT/"
+from pathlib import Path
 
-DATA_PATH = "/Users/matteo/Desktop/ITS ICT/fondam program/esercizi/5_270426/student_pipeline/config.json"
+
+_BASE_DIR = Path(__file__).resolve().parent
+PROJECT_PATH = str(_BASE_DIR)
+DATA_PATH = str(_BASE_DIR / "config.json")
