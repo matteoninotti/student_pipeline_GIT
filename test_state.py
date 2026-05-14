@@ -7,7 +7,7 @@ import state
 
 class TestStatePaths(unittest.TestCase):
   def test_project_path_is_repo_root(self):
-    expected_path = f"{Path(__file__).resolve().parent}{os.sep}"
+    expected_path = os.path.dirname(os.path.abspath(__file__)) + os.sep
     self.assertEqual(state.PROJECT_PATH, expected_path)
 
   def test_data_path_points_to_config(self):
