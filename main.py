@@ -66,11 +66,12 @@ class CLI:
     print("\n\\/------- statistiche corso -------\\/")
     # creaz istanza Stats_calculator passando self.studenti_json (= ret di self.etl.create_validi_json())
     self.calc = Stats_calculator(corso, self.studenti_json)
-    stats_corso = self.calc.calc_stats_corso()
+    self.stats_corso = self.calc.calc_stats_corso()
     print(f"{json.dumps(stats_corso, indent=2)}")
     print("\n\\/------- statistiche studenti -------\\/")
-    stats_studenti = self.calc.calc_stats_studenti()
-    print(f"{json.dumps(stats_studenti, indent=2)}")
+    self.stats_studenti = self.calc.calc_stats_studenti()
+    print(f"{json.dumps(self.stats_studenti, indent=2)}")
+    top5 = self.calc.calc_top5_studenti(self.stats_studenti)
 
   def all(self):
     pass

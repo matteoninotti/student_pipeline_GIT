@@ -48,16 +48,13 @@ class Stats_calculator:
       
     return stats
 
-  #def calc_top5_studenti() -> list:
-  #  stats = calc_stats_studenti(voti_studenti)
-  #  medie_top5 = sorted(stats, key = lambda stats: stats["media"], reverse=True)[:5]
-  #  
-  #  return medie_top5
-#
-#
-#
+  def calc_top5_studenti(self, stats_studenti) -> list:
+    medie_top5 = sorted(stats_studenti, key = lambda stats: stats["media"], reverse=True)[:5]
+    
+    return medie_top5
+
   #txt_file_name = PROJECT_PATH + "report/report_" + now_time + ".txt"
-#
+
   #def create_report():
   #  report = f"""report della classe: {Corso_studenti.CLASSE}
   #generato in data e ora: {now_time}
