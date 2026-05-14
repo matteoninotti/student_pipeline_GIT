@@ -63,7 +63,7 @@ class Stats_calculator:
     return medie_top5
   
   
-  def create_report(self, da_rimuovere: dict,
+  def create_report(self, da_rimuovere: list,
                     validation_errors: str,
                     stats_corso: dict,
                     stats_studenti: list,

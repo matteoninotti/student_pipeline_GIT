@@ -94,8 +94,6 @@ class CLI:
   
   
   def all(self) -> None:
-    self.generate()
-    self.validate()
     self.report()
   
   
@@ -115,16 +113,23 @@ def main() -> None:
   cmd = argv[1] if len(argv) > 1 else ""
   
   # leggi il comando opzionale da terminale
-  if cmd == "generate":
+  if cmd == "--generate":
     cli.generate()
-  elif cmd == "validate":
+  elif cmd == "--validate":
     cli.validate()
-  elif cmd == "report":
+  elif cmd == "--report":
     cli.report()
-  elif cmd == "all":
+  elif cmd == "--all":
     cli.all()
   else:
-    cli.all()
+    cli.generate()
+    print("""
+    usa questi comandi:
+    --generate -> crea nuovo corso di studenti
+    --validate -> valida che siano corretti e pulisci quelli sbagliati
+    --report   -> crea un report delle statistiche di corso e studenti
+    --all      -> esegui tutto in ordine
+          """)
 
 
 
