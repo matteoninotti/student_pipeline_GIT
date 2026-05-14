@@ -219,8 +219,9 @@ __marimo__/
 
 # project-related
 .DS_Store
+data/.DS_Store
 data/backup/
 data/output/
 data/input/*.csv
 report/
-.vscode/
+.vscode
