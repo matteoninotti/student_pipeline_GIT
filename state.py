@@ -1,5 +1,7 @@
 import os
+from pathlib import Path
 
 
-PROJECT_PATH = os.path.dirname(os.path.abspath(__file__)) + os.sep
-DATA_PATH = os.path.join(PROJECT_PATH, "config.json")
+_BASE_DIR = Path(__file__).resolve().parent
+PROJECT_PATH = os.path.join(str(_BASE_DIR), "")
+DATA_PATH = str(_BASE_DIR / "config.json")

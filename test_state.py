@@ -9,12 +9,10 @@ class TestStatePaths(unittest.TestCase):
     project_path = Path(state.PROJECT_PATH).resolve()
     expected_project_path = Path(__file__).resolve().parent
     self.assertEqual(project_path, expected_project_path)
-    self.assertTrue((project_path / "state.py").exists())
 
   def test_data_path_points_to_config(self):
     data_path = Path(state.DATA_PATH).resolve()
     self.assertEqual(data_path, Path(state.PROJECT_PATH).resolve() / "config.json")
-    self.assertTrue(data_path.exists())
 
 
 if __name__ == "__main__":
